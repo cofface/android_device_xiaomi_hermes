@@ -1,16 +1,8 @@
-# Android fstab file.
-#<src>           <mnt_point>         <type>    <mnt_flags and options>                 <fs_mgr_flags>
-# The filesystem that contains the filesystem checker binary (typically /system) cannot
-# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+/boot          emmc      /dev/block/mmcblk0p7
+/recovery      emmc      /dev/block/mmcblk0p8
+/system        ext4      /dev/block/mmcblk0p15
+/data          ext4      /dev/block/mmcblk0p17	length=-16384
+/cache         ext4      /dev/block/mmcblk0p16
 
-
-/dev/block/mmcblk0p7	/boot       	emmc  		defaults		defaults
-/dev/block/mmcblk0p8	/recovery   	emmc  		defaults		defaults
-/dev/block/mmcblk0p15	/system     	ext4  		ro			wait
-/dev/block/mmcblk0p17	/data       	ext4  		noatime,nosuid,nodev,noauto_da_alloc,discard	wait,check,encryptable=footer
-/dev/block/mmcblk0p16	/cache      	ext4  		noatime,nosuid,nodev,noauto_da_alloc,discard	wait,check
-
-
-#vold
-/devices/mtk-msdc.0/11240000.MSDC1  auto      vfat      defaults        voldmanaged=sdcard1:auto
-/devices/bus.2/11270000.USB3_XHCI   auto      vfat      defaults        voldmanaged=usbotg:auto
+/external_sd      vfat       /dev/block/mmcblk1p1 /dev/block/mmcblk1  flags=display="External SD";storage;wipeingui;removable
+/usbstorage   vfat		 /dev/block/sda1		/dev/block/sda				    flags=fsflags=utf8;display="USB Storage";storage;removable
